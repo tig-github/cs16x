@@ -19,14 +19,9 @@ Computational Geometry and Geometric Modeling
 # Yet to be taken
 
 
-
 ## CS 163
 
 Graph Algorithms
-
-### CS 165 - not featured to avoid academic dishonesty
-
-Project in Algorithms
 
 ## CS 166
 
