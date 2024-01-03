@@ -42,13 +42,10 @@ def breadth_first_traversal(vertex, graph, visited, action):
                 visited.add(child)
 
 
-def trajans(graph, visited):
-    pass 
-
-def topological_order(graph, visited):
+def topological_order(vertex, graph, visited, action):
     pass
 
-def djikstra(graph, visited):
+def djikstra(vertex, graph, visited, action):
     pass
 
 
