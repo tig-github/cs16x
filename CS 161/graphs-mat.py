@@ -8,9 +8,6 @@ def depth_first_traversal(node, visited):
 def breadth_first_traversal(node, visited):
     pass
 
-def trajans(node, visited):
-    pass 
-
 def topological_order(node, visited):
     pass
 
