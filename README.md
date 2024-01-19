@@ -19,7 +19,7 @@ Formal Languages and Automata
 Computational Geometry and Geometric Modeling
 
 
-## Yet to be taken
+## Ongoing
 
 
 ## CS 163
