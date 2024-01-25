@@ -29,8 +29,11 @@ def selection_sort(array):
     return array
 
 def bubble_sort(array):
-    pass 
-
+    for i in range(len(array)):
+        for j in range(len(array)):
+            if i != j and array[i] < array[j]:
+                array[i],array[j] = array[j],array[i]
+    return array
 
 # O(nlogn)
 
@@ -59,5 +62,6 @@ def radix_sort(array):
 if __name__ == '__main__':
     #print(insertion_sort([1,5,4,2]))
     #print(insertion_sort([randint(0,100) for _ in range(randint(0,100))]))
-    print(selection_sort([1,5,4,2]))
-    print(selection_sort([randint(0,100) for _ in range(randint(0,100))]))
+    #print(selection_sort([1,5,4,2]))
+    #print(selection_sort([randint(0,100) for _ in range(randint(0,100))]))
+    print(bubble_sort([1,5,4,3]))

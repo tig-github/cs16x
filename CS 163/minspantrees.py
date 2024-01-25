@@ -44,6 +44,25 @@ def prim(start_vertex, graph):
                 heapq.heappush(priority_queue, (neighbor[1], neighbor[0], current_vertex))
     return min_span_tree[0:] # we don't need the first self edge
         
+        
+# Union Find Primitives
+def find(forest, node):
+    # determines root of the node's tree
+    # with path compression
+    if forest[node] == -1:
+        return node
+    else:
+        root =  find(forest, forest[node])
+        forest[node] = root
+        return root
+
+def union(forest, node1, node2):
+    # merges two trees
+    root1 = find(forest, node1)
+    root2 = find(forest, node2)
+    if root1 != root2:
+        forest[root1] = root2
+        
 
 def boruvka(graph):
     """
@@ -75,23 +94,6 @@ def kruskal(graph):
     """
     assert verify_undirected(graph), 'Ensure the input is an undirected graph, and not a directed graph'
 
-    def find(forest, node):
-        # determines root of the node's tree
-        # with path compression
-        if forest[node] == -1:
-            return node
-        else:
-            root =  find(forest, forest[node])
-            forest[node] = root
-            return root
-
-    def union(forest, node1, node2):
-        # merges two trees
-        root1 = find(forest, node1)
-        root2 = find(forest, node2)
-        if root1 != root2:
-            forest[root1] = root2
-        
     ids = {k:i for i,k in enumerate(graph.keys())} # maps to keys
     forest = [-1 for _ in range(len(graph))] # -1 implies no parent
     edges = []

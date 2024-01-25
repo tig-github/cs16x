@@ -53,7 +53,7 @@ def djikstra(vertex, graph):
 
     Args:
         vertex (int): current vertex
-        graph (dict[list(tuple)]): adjacency list
+        graph (dict[list(tuple)]): adjacency list of form vertex: (outgoing vertex, weight)
         visited (set): visited nodes
     """
     visited = [False for _ in range(len(graph))]
