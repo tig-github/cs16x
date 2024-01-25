@@ -13,6 +13,7 @@ def verify_undirected(graph):
     """
     return True
 
+
 def prim(start_vertex, graph):
     """
     Prim's Minimum Spanning Tree Algorithm
@@ -41,19 +42,75 @@ def prim(start_vertex, graph):
         for neighbor in graph[current_vertex]:
             if neighbor[0] not in tree_members:
                 heapq.heappush(priority_queue, (neighbor[1], neighbor[0], current_vertex))
-        
-        
     return min_span_tree[0:] # we don't need the first self edge
         
 
 def boruvka(graph):
-    pass
+    """
+    Boruvka's Minimum Spanning Tree Algorithm
+    Undirected graph with cost values
+    Assumes keys form a total order in this implementation
+
+    Args:
+        vertex (int): current vertex
+        graph (dict[list(tuple)]): adjacency list of form vertex: (outgoing vertex, weight)
+        visited (set): visited nodes
+    """
+    assert verify_undirected(graph), 'Ensure the input is an undirected graph, and not a directed graph'
+    
+    min_span_forest = [(v,{}) for v in graph]
+    completed = False
+
 
 def kruskal(graph):
-    pass
+    """
+    Kruskal's Minimum Spanning Tree Algorithm
+    Undirected graph with cost values
+    Assumes keys form a total order in this implementation
 
+    Args:
+        vertex (int): current vertex
+        graph (dict[list(tuple)]): adjacency list of form vertex: (outgoing vertex, weight)
+        visited (set): visited nodes
+    """
+    assert verify_undirected(graph), 'Ensure the input is an undirected graph, and not a directed graph'
 
+    def find(forest, node):
+        # determines root of the node's tree
+        # with path compression
+        if forest[node] == -1:
+            return node
+        else:
+            root =  find(forest, forest[node])
+            forest[node] = root
+            return root
+
+    def union(forest, node1, node2):
+        # merges two trees
+        root1 = find(forest, node1)
+        root2 = find(forest, node2)
+        if root1 != root2:
+            forest[root1] = root2
+        
+    ids = {k:i for i,k in enumerate(graph.keys())} # maps to keys
+    forest = [-1 for _ in range(len(graph))] # -1 implies no parent
+    edges = []
+    for vertex,E in graph.items():
+        for edge in E:
+            edges.append((vertex, edge))    
+    pruned_edges = []
+    covered_edges = set()
+    for edge in sorted(edges, key=lambda x:x[1]): # prune for repeated more expensive edges
+        if (edge[0], edge[1][0]) not in covered_edges:
+            pruned_edges.append(edge)
+            covered_edges.add((edge[0], edge[1][0]))
+            covered_edges.add((edge[1][0], edge[0]))        
+    for edge in pruned_edges:
+        union(forest, ids[edge[0]], ids[edge[1][0]])
+    return forest
+    
 if __name__ == '__main__':
-    visited = set()
-    mst = prim('A', {'A': [('B', 2), ('D', 1)], 'B': [('A', 2), ('D', 2)], 'C': [('D', 3)], 'D': [('A', 1), ('B', 2), ('C', 3)]})
+    graph = {'A': [('B', 2), ('D', 1)], 'B': [('A', 2), ('D', 2)], 'C': [('D', 3)], 'D': [('A', 1), ('B', 2), ('C', 3)]}
+    #mst = prim('A', graph)
+    mst = kruskal(graph)
     print('mst=', mst) # two valid MSTs for this graph
