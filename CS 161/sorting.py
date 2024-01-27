@@ -28,6 +28,7 @@ def selection_sort(array):
         i += 1
     return array
 
+
 def bubble_sort(array):
     for i in range(len(array)):
         for j in range(len(array)):

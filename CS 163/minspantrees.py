@@ -2,6 +2,7 @@
 # corresponds to Week 2 of CS 163 https://ics.uci.edu/~eppstein/163/
 # uses adjacency list representations with weights
 import heapq
+from collections import defaultdict
 
 def verify_undirected(graph):
     """
@@ -11,6 +12,15 @@ def verify_undirected(graph):
     Args:
         graph (dict[list(tuple)]): adjacency list of form vertex: (outgoing vertex, weight)
     """
+    members = defaultdict(list)
+    for vertex,edges in graph.items():
+        for edge in edges:
+            members[vertex].append(edge[0])
+            
+    for vertex,edges in graph.items():
+        for edge in edges:
+            if vertex not in members[edge[0]]:
+                return False
     return True
 
 
