@@ -81,7 +81,7 @@ def topological_order(graph):
     
     
 
-def djikstra(vertex, graph):
+def dijkstra(vertex, graph):
     """
     Djikstra's Shortest Paths Algorithm
     DAG with cost values, unlike the other algorithms, in format below
@@ -118,6 +118,6 @@ if __name__ == '__main__':
     # depth_first_traversal(0, [[1,2],[0,2],[3],[2]], visited, print)
     # depth_first_traversal(2, [[1,2],[0,2],[3],[2]], visited, print)
     # breadth_first_traversal(0, [[1,2],[0,2],[3],[2]], visited, print)
-    paths1 = djikstra(0, {0: [(1, 1), (2, 4)], 1: [(0, 1)], 2: [(0, 2)], 3:[], 4: [(3, 5), (0, 4)]})
-    paths2 = djikstra(4, {0: [(1, 1), (2, 4)], 1: [(0, 1)], 2: [(0, 2)], 3:[], 4: [(3, 5), (0, 4)]})
+    paths1 = dijkstra(0, {0: [(1, 1), (2, 4)], 1: [(0, 1)], 2: [(0, 2)], 3:[], 4: [(3, 5), (0, 4)]})
+    paths2 = dijkstra(4, {0: [(1, 1), (2, 4)], 1: [(0, 1)], 2: [(0, 2)], 3:[], 4: [(3, 5), (0, 4)]})
     print(paths1, paths2)

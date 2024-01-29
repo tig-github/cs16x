@@ -37,6 +37,7 @@ def dijkstra(vertex, graph):
                     
     return (distance,predecessor)
 
+
 def bellman_ford(vertex, graph):
     """
     Bellman Ford Algorithm
@@ -62,6 +63,7 @@ def bellman_ford(vertex, graph):
             if distance[vertex] + edge[1] < distance[edge[0]]:
                 print("Negative Cycle Exists")
                 return ([],[])
+            
     return (distance,predecessor)
             
             
@@ -82,9 +84,9 @@ def johnson(graph):
         for edge in graph[vertex]:
             edge[1] = edge[1] + distance[vertex] + distance[edge[0]]
     del graph[len(graph)-1] # remove the new vertex
-    final_distance,predecessor = djikstra(graph)
+    final_distance,predecessor = dijkstra(graph)
     # implement distance fix here
-    return ([final_distance],predecessor)
+    return (final_distance,predecessor)
     
 
 def suurballe(graph):
