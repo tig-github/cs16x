@@ -59,11 +59,22 @@ def bellman_ford(vertex, graph):
         for edge in graph[vertex]:
             if distance[vertex] + edge[1] < distance[edge[0]]:
                 print("Negative Cycle Exists")
+                return ([],[])
     return (distance,predecessor)
             
             
 def johnson(graph):
-    pass 
+    graph[len(graph)] = [(graph[0], 0)] # add new vertex
+    new_vertex = len(graph)-1
+    distance = bellman_ford(new_vertex, graph)
+    for vertex in graph: # reweighting the graph
+        for edge in graph[vertex]:
+            edge[1] = edge[1] + distance[vertex] + distance[edge[0]]
+    del graph[len(graph)-1] # remove the new vertex
+    final_distance,predecessor = djikstra(graph)
+    # implement distance fix here
+    return ([final_distance],predecessor)
+    
 
 def suurballe(graph):
     pass 
