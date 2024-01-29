@@ -1,8 +1,40 @@
 # shortest paths algorithms
 # corresponds to Week 3 of CS 163 https://ics.uci.edu/~eppstein/163/
 # uses adjacency list representations
+import heapq 
 
-# see CS 161 graphs-list.py for Djikstra's
+
+# copied from CS 161/graphs-list.py for use as a primitive in Johnson's Algorithm
+def djikstra(vertex, graph):
+    """
+    Djikstra's Shortest Paths Algorithm
+    DAG with cost values, unlike the other algorithms, in format below
+
+    Args:
+        vertex (int): current vertex
+        graph (dict[list(tuple)]): adjacency list of form vertex: (outgoing vertex, weight)
+    """
+    visited = [False for _ in range(len(graph))]
+    predecessor = [-1 for _ in range(len(graph))]
+    distance = [float('inf') for _ in range(len(graph))]
+    
+    predecessor[vertex] = None 
+    distance[vertex] = 0
+    
+    priority_queue = []
+    heapq.heappush(priority_queue, (0, vertex))
+    
+    while priority_queue:
+        _,current_vertex = heapq.heappop(priority_queue)
+        if visited[current_vertex] == False:
+            visited[current_vertex] = True 
+            for child,cost in graph[current_vertex]:
+                if (distance[child] > distance[current_vertex] + cost):
+                    distance[child] = distance[current_vertex] + cost
+                    predecessor[child] = current_vertex
+                    heapq.heappush(priority_queue, (distance[child], child))
+                    
+    return (distance,predecessor)
 
 def bellman_ford(vertex, graph):
     """
@@ -12,7 +44,6 @@ def bellman_ford(vertex, graph):
     Args:
         vertex (int): current vertex
         graph (dict[list(tuple)]): adjacency list of form vertex: (outgoing vertex, weight)
-        visited (set): visited nodes
     """
     predecessor = [-1 for _ in range(len(graph))]
     distance = [float('inf') for _ in range(len(graph))]
@@ -31,8 +62,6 @@ def bellman_ford(vertex, graph):
     return (distance,predecessor)
             
             
-        
-
 def johnson(graph):
     pass 
 

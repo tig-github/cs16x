@@ -42,9 +42,44 @@ def breadth_first_traversal(vertex, graph, visited, action):
                 visited.add(child)
 
 
-def topological_order(vertex, graph, visited):
-    pass
+# primitive for topological order algorithm
+def topological_search(current_vertex, graph, reached, order):
+    """
+    Depth First Search Topological Ordering Algorithm
 
+    Args:
+        current_vertex (int): current vertex
+        graph (dict[list(tuple)]): adjacency list of form vertex: (outgoing vertex, weight)
+        reached (list(bool)): list of vertices that have been reached at some point during the topological ordering algorithm
+        order (list(int)): order of the algorithm
+    """
+    reached[current_vertex] = True
+    for outgoing_vertex in graph[current_vertex]:
+        if not reached[outgoing_vertex]:
+            topological_search(outgoing_vertex, graph, reached, order)
+    return order + [current_vertex]
+            
+
+def topological_order(graph):
+    """
+    Depth First Search Topological Ordering Algorithm
+    Directed Acyclic Graph
+
+    Args:
+        graph (dict[list(tuple)]): adjacency list of form vertex: (outgoing vertex, weight)
+    """
+    reached = [False for _ in range(len(graph))]
+    order = []
+    for vertex in graph:
+        new_order = []
+        if not reached[vertex]:
+            order.append(topological_search(vertex, graph, reached, new_order))
+    final_order = []
+    for group in order[::-1]:
+        final_order.extend(group)
+    return final_order
+    
+    
 
 def djikstra(vertex, graph):
     """
@@ -54,7 +89,6 @@ def djikstra(vertex, graph):
     Args:
         vertex (int): current vertex
         graph (dict[list(tuple)]): adjacency list of form vertex: (outgoing vertex, weight)
-        visited (set): visited nodes
     """
     visited = [False for _ in range(len(graph))]
     predecessor = [-1 for _ in range(len(graph))]
