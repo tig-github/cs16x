@@ -30,9 +30,8 @@ def prim(start_vertex, graph):
     Undirected graph with cost values
 
     Args:
-        vertex (int): current vertex
+        start_vertex (int): vertex to initialize prim's on
         graph (dict[list(tuple)]): adjacency list of form vertex: (outgoing vertex, weight)
-        visited (set): visited nodes
     """
     assert verify_undirected(graph), 'Ensure the input is an undirected graph, and not a directed graph'
     
@@ -81,9 +80,7 @@ def boruvka(graph):
     Assumes keys form a total order in this implementation
 
     Args:
-        vertex (int): current vertex
         graph (dict[list(tuple)]): adjacency list of form vertex: (outgoing vertex, weight)
-        visited (set): visited nodes
     """
     assert verify_undirected(graph), 'Ensure the input is an undirected graph, and not a directed graph'
     
@@ -98,9 +95,7 @@ def kruskal(graph):
     Assumes keys form a total order in this implementation
 
     Args:
-        vertex (int): current vertex
         graph (dict[list(tuple)]): adjacency list of form vertex: (outgoing vertex, weight)
-        visited (set): visited nodes
     """
     assert verify_undirected(graph), 'Ensure the input is an undirected graph, and not a directed graph'
 

@@ -76,7 +76,7 @@ def djikstra(vertex, graph):
                     predecessor[child] = current_vertex
                     heapq.heappush(priority_queue, (distance[child], child))
                     
-    return distance
+    return (distance,predecessor)
 
 
 if __name__ == '__main__':
