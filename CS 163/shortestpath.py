@@ -5,11 +5,12 @@ import heapq
 
 
 # copied from CS 161/graphs-list.py for use as a primitive in Johnson's Algorithm
-def djikstra(vertex, graph):
+def dijkstra(vertex, graph):
     """
-    Djikstra's Shortest Paths Algorithm
+    Dijkstra's Shortest Paths Algorithm
     DAG with cost values, unlike the other algorithms, in format below
-
+    Analysis: O(mlogn) | O(m + nlogn) with fibonacci heap
+    
     Args:
         vertex (int): current vertex
         graph (dict[list(tuple)]): adjacency list of form vertex: (outgoing vertex, weight)
@@ -40,6 +41,7 @@ def bellman_ford(vertex, graph):
     """
     Bellman Ford Algorithm
     Directed graph with cost values
+    Analysis: O(nm)
 
     Args:
         vertex (int): current vertex
@@ -64,6 +66,15 @@ def bellman_ford(vertex, graph):
             
             
 def johnson(graph):
+    """
+    Johnson's Algorithm
+    Directed graph with cost values
+    Analysis: O(mn + n^2logn)
+
+    Args:
+        vertex (int): current vertex
+        graph (dict[list(tuple)]): adjacency list of form vertex: (outgoing vertex, weight)
+    """
     graph[len(graph)] = [(graph[0], 0)] # add new vertex
     new_vertex = len(graph)-1
     distance = bellman_ford(new_vertex, graph)
@@ -77,6 +88,15 @@ def johnson(graph):
     
 
 def suurballe(graph):
+    """
+    Suurballe's Algorithm - Special Case of Network Flow
+    Directed graph with cost values
+    Analysis: O(m + nlogn)
+
+    Args:
+        vertex (int): current vertex
+        graph (dict[list(tuple)]): adjacency list of form vertex: (outgoing vertex, weight)
+    """
     pass 
 
 def a_star(graph, heuristic):

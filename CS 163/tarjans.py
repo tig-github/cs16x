@@ -3,6 +3,7 @@
 # handles bookkeeping independently of vertices
 
 def strong_connect(vertex, graph, stack, stack_members, smallest_index, index, lowlink):
+    # Analysis: O(n+m)
     index[vertex] = smallest_index
     lowlink[vertex] = smallest_index
     smallest_index += 1

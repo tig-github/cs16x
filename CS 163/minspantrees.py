@@ -28,6 +28,7 @@ def prim(start_vertex, graph):
     """
     Prim's Minimum Spanning Tree Algorithm
     Undirected graph with cost values
+    Analysis: O(mlogn) | O(m + nlogn) with fibonacci heap
 
     Args:
         start_vertex (int): vertex to initialize prim's on
@@ -78,6 +79,7 @@ def boruvka(graph):
     Boruvka's Minimum Spanning Tree Algorithm
     Undirected graph with cost values
     Assumes keys form a total order in this implementation
+    Analysis: O(mlogn)
 
     Args:
         graph (dict[list(tuple)]): adjacency list of form vertex: (outgoing vertex, weight)
@@ -93,6 +95,7 @@ def kruskal(graph):
     Kruskal's Minimum Spanning Tree Algorithm
     Undirected graph with cost values
     Assumes keys form a total order in this implementation
+    Analysis: O(mlogn)
 
     Args:
         graph (dict[list(tuple)]): adjacency list of form vertex: (outgoing vertex, weight)
