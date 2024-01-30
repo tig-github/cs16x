@@ -101,5 +101,35 @@ def suurballe(graph):
     """
     pass 
 
-def a_star(graph, heuristic):
-    pass
+
+def a_star(vertex, graph, heuristic: function):
+    """
+    A* Algorithm
+    Directed graph with cost values
+    Analysis: O(mlogn) | O(m + nlogn) with fibonacci heap
+
+    Args:
+        vertex (int): current vertex
+        graph (dict[list(tuple)]): adjacency list of form vertex: (outgoing vertex, weight)
+    """
+    visited = [False for _ in range(len(graph))]
+    predecessor = [-1 for _ in range(len(graph))]
+    distance = [float('inf') for _ in range(len(graph))]
+    
+    predecessor[vertex] = None 
+    distance[vertex] = 0
+    
+    priority_queue = []
+    heapq.heappush(priority_queue, (0, vertex))
+    
+    while priority_queue:
+        _,current_vertex = heapq.heappop(priority_queue)
+        if visited[current_vertex] == False:
+            visited[current_vertex] = True 
+            for child,cost in graph[current_vertex]:
+                if (distance[child] > distance[current_vertex] + cost + heuristic(vertex,child)):
+                    distance[child] = distance[current_vertex] + cost
+                    predecessor[child] = current_vertex
+                    heapq.heappush(priority_queue, (distance[child], child))
+                    
+    return (distance,predecessor)
