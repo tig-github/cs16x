@@ -55,7 +55,7 @@ def prim(start_vertex, graph):
     return min_span_tree[0:] # we don't need the first self edge
         
         
-# Union Find Primitives
+# Union Find Primitives - abstracted into a class later
 def find(forest, node):
     # determines root of the node's tree
     # with path compression
