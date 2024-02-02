@@ -1,7 +1,7 @@
 # Week 2 Minimum Span Trees testing
 
 import unittest
-from minspantrees import prim, boruvka
+from src.minspantrees import prim, boruvka
 
 class TestMinSpanTrees(unittest.TestCase):
     # Prim's Algorithm

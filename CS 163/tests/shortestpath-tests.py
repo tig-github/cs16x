@@ -1,7 +1,7 @@
 # Week 3 Shortest Paths testing
 
 import unittest
-from shortestpath import dijkstra, bellman_ford, johnson, suurballe, a_star
+from src.shortestpath import dijkstra, bellman_ford, johnson, suurballe, a_star
 
 class TestMinSpanTrees(unittest.TestCase):
     # Dijkstra's Algorithm
