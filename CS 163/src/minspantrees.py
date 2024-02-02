@@ -34,6 +34,7 @@ def prim(start_vertex, graph):
         start_vertex (int): vertex to initialize prim's on
         graph (dict[list(tuple)]): adjacency list of form vertex: (outgoing vertex, weight)
     """
+    if not graph: return None
     assert verify_undirected(graph), 'Ensure the input is an undirected graph, and not a directed graph'
     
     min_span_tree = [] # list of edges in form (A, B) for vertices A,B with an edge
@@ -121,6 +122,6 @@ def kruskal(graph):
     
 if __name__ == '__main__':
     graph = {'A': [('B', 2), ('D', 1)], 'B': [('A', 2), ('D', 2)], 'C': [('D', 3)], 'D': [('A', 1), ('B', 2), ('C', 3)]}
-    #mst = prim('A', graph)
-    mst = kruskal(graph)
+    mst = prim('A', graph)
+    #mst = kruskal(graph)
     print('mst=', mst) # two valid MSTs for this graph
