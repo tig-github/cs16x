@@ -2,6 +2,7 @@
 
 import unittest
 from src.minspantrees import prim, boruvka
+from src.utils.graph import Graph
 
 class TestMinSpanTrees(unittest.TestCase):
     # Prim's Algorithm
