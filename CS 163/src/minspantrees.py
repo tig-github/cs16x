@@ -3,7 +3,6 @@
 # uses adjacency list representations with weights
 import heapq
 from collections import defaultdict
-from utils.unionfind import UnionFind
 
 
 def verify_undirected(graph):
