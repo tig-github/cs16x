@@ -15,6 +15,7 @@ def dijkstra(vertex, graph):
         vertex (int): current vertex
         graph (dict[list(tuple)]): adjacency list of form vertex: (outgoing vertex, weight)
     """
+    if not graph: return ([],[])
     visited = [False for _ in range(len(graph))]
     predecessor = [-1 for _ in range(len(graph))]
     distance = [float('inf') for _ in range(len(graph))]
@@ -102,7 +103,7 @@ def suurballe(graph):
     pass 
 
 
-def a_star(vertex, graph, heuristic: function):
+def a_star(vertex, graph, heuristic):
     """
     A* Algorithm
     Directed graph with cost values

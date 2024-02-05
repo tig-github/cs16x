@@ -35,7 +35,7 @@ def prim(start_vertex, graph):
         start_vertex (int): vertex to initialize prim's on
         graph (dict[list(tuple)]): adjacency list of form vertex: (outgoing vertex, weight)
     """
-    if not graph: return None
+    if not graph: return []
     assert verify_undirected(graph), 'Ensure the input is an undirected graph, and not a directed graph'
     
     min_span_tree = [] # list of edges in form (A, B) for vertices A,B with an edge
@@ -86,6 +86,7 @@ def boruvka(graph):
     Args:
         graph (dict[list(tuple)]): adjacency list of form vertex: (outgoing vertex, weight)
     """
+    if not graph: return []
     assert verify_undirected(graph), 'Ensure the input is an undirected graph, and not a directed graph'
     
     min_span_forest = [(v,{}) for v in graph]
@@ -102,6 +103,7 @@ def kruskal(graph):
     Args:
         graph (dict[list(tuple)]): adjacency list of form vertex: (outgoing vertex, weight)
     """
+    if not graph: return []
     assert verify_undirected(graph), 'Ensure the input is an undirected graph, and not a directed graph'
 
     ids = {k:i for i,k in enumerate(graph.keys())} # maps to keys
@@ -123,6 +125,9 @@ def kruskal(graph):
     
 if __name__ == '__main__':
     graph = {'A': [('B', 2), ('D', 1)], 'B': [('A', 2), ('D', 2)], 'C': [('D', 3)], 'D': [('A', 1), ('B', 2), ('C', 3)]}
+    # graph = {'A': [('B', 1)], 'B': [('A', 1), ('C', 1)], 'C': [('B', 1), ('D', 1)], 'D': [('C', 1), ('E', 1)], 'E': [('D', 1), ('F', 1)], 'F': [('E', 1), ('G', 1)], 'G': [('F', 1)]}
+    # graph = {'A': [('B', 1), ('D', 2)], 'B': [('A', 1), ('C', 1)], 'C': [('B', 1), ('D', 1), ('F', 2)], 'D': [('C', 1), ('E', 1), ('A', 2), ('G', 2)], 'E': [('D', 1), ('F', 1), ('G', 3)], 'F': [('E', 1), ('G', 1), ('C', 2)], 'G': [('F', 1), ('D', 2), ('E', 3)]}
+    # graph = {'A': [('B', 1)], 'B': [('A', 1), ('C', 1)], 'C': [('B', 1), ('D', 1)], 'D': [('C', 1), ('E', 1)], 'E': [('D', 1), ('F', 1)], 'F': [('E', 1), ('G', 1)], 'G': [('F', 1)]}
     mst = prim('A', graph)
     #mst = kruskal(graph)
     print('mst=', mst) # two valid MSTs for this graph

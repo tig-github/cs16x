@@ -1,0 +1,21 @@
+# Week 3 Shortest Paths testing
+
+import unittest
+from src.shortestpath import dijkstra, bellman_ford, johnson, suurballe, a_star
+
+class TestMinSpanTrees(unittest.TestCase):
+    # Dijkstra's Algorithm
+    def test_dijkstra_null(self):
+        graph = {}
+        distances,predecessors = dijkstra('', graph)
+        self.assertEqual([], distances)
+        self.assertEqual([], predecessors)
+        
+    def test_dijkstra_straightgraph(self):
+        graph = {1: [(2, 1), (0, 1)], 2: [(1, 1), (3, 1)], 3: [(2, 1), (4, 1)], 4: [(3, 1), (5, 1)], 5: [(4, 1), (6, 1)], 6: [(5, 1), (7, 1)], 7: [(6, 1)], 0: [(1, 1)]}
+        distances,predecessors = dijkstra(1, graph)
+        self.assertEqual([1, 0, 1, 2, 3, 4, 5, 6], distances)
+        self.assertEqual([1, None, 1, 2, 3, 4, 5, 6], predecessors)
+        
+if __name__ == '__main__':
+    unittest.main()
