@@ -106,7 +106,6 @@ def kruskal(graph):
     assert verify_undirected(graph), 'Ensure the input is an undirected graph, and not a directed graph'
 
     ids = {k:i for i,k in enumerate(graph.keys())} # maps to keys
-    reverse_ids = {i:k for k,i in ids.items()}
     forest = [-1 for _ in range(len(graph))] # -1 implies no parent
     edges = []
     min_span_tree = []
@@ -115,7 +114,7 @@ def kruskal(graph):
             edges.append((vertex, edge))    
     pruned_edges = []
     covered_edges = set()
-    for edge in sorted(edges, key=lambda x:x[1]): # prune for repeated more expensive edges
+    for edge in sorted(edges, key=lambda x:x[1][1]): # prune for repeated more expensive edges
         if (edge[0], edge[1][0]) not in covered_edges:
             pruned_edges.append(edge)
             covered_edges.add((edge[0], edge[1][0]))
@@ -126,14 +125,14 @@ def kruskal(graph):
         u = ids[edge[0]]
         v = ids[edge[1][0]]
         if find(forest, u) != find(forest, v):
-            min_span_tree.append((edge[0],edge[1][0]))
+            min_span_tree.append((edge[0], edge[1][0]))
             union(forest, u, v)
     return min_span_tree
     
 if __name__ == '__main__':
-    graph = {'A': [('B', 2), ('D', 1)], 'B': [('A', 2), ('D', 2)], 'C': [('D', 3)], 'D': [('A', 1), ('B', 2), ('C', 3)]}
+    # graph = {'A': [('B', 2), ('D', 1)], 'B': [('A', 2), ('D', 2)], 'C': [('D', 3)], 'D': [('A', 1), ('B', 2), ('C', 3)]}
     # graph = {'A': [('B', 1)], 'B': [('A', 1), ('C', 1)], 'C': [('B', 1), ('D', 1)], 'D': [('C', 1), ('E', 1)], 'E': [('D', 1), ('F', 1)], 'F': [('E', 1), ('G', 1)], 'G': [('F', 1)]}
-    # graph = {'A': [('B', 1), ('D', 2)], 'B': [('A', 1), ('C', 1)], 'C': [('B', 1), ('D', 1), ('F', 2)], 'D': [('C', 1), ('E', 1), ('A', 2), ('G', 2)], 'E': [('D', 1), ('F', 1), ('G', 3)], 'F': [('E', 1), ('G', 1), ('C', 2)], 'G': [('F', 1), ('D', 2), ('E', 3)]}
+    graph = {'A': [('B', 1), ('D', 2)], 'B': [('A', 1), ('C', 1)], 'C': [('B', 1), ('D', 1), ('F', 2)], 'D': [('C', 1), ('E', 1), ('A', 2), ('G', 2)], 'E': [('D', 1), ('F', 1), ('G', 3)], 'F': [('E', 1), ('G', 1), ('C', 2)], 'G': [('F', 1), ('D', 2), ('E', 3)]}
     # graph = {'A': [('B', 1)], 'B': [('A', 1), ('C', 1)], 'C': [('B', 1), ('D', 1)], 'D': [('C', 1), ('E', 1)], 'E': [('D', 1), ('F', 1)], 'F': [('E', 1), ('G', 1)], 'G': [('F', 1)]}
     #mst = prim('A', graph)
     mst = kruskal(graph)

@@ -47,12 +47,26 @@ class TestMinSpanTrees(unittest.TestCase):
         graph = {}
         MST = kruskal(graph)
         self.assertEqual([], MST)
+        
+    def test_kruskal_straightgraph(self):
+        graph = {'A': [('B', 1)], 'B': [('A', 1), ('C', 1)], 'C': [('B', 1), ('D', 1)], 'D': [('C', 1), ('E', 1)], 'E': [('D', 1), ('F', 1)], 'F': [('E', 1), ('G', 1)], 'G': [('F', 1)]}
+        MST = kruskal(graph)
+        self.assertEqual(MST, [('A', 'B'), ('B', 'C'), ('C', 'D'), ('D', 'E'), ('E', 'F'), ('F', 'G')])
     
     def test_kruskall_simplegraph(self):
         graph = {'A': [('B', 2), ('D', 1)], 'B': [('A', 2), ('D', 2)], 'C': [('D', 3)], 'D': [('A', 1), ('B', 2), ('C', 3)]}
         MST = kruskal(graph)
-        self.assertEqual(MST, [('A', 'D'), ('A', 'B'), ('D', 'C')])
+        self.assertEqual(MST, [('A', 'D'), ('A', 'B'), ('C', 'D')])
 
+    def test_kruskal_complexgraph_one(self):
+        graph = {'A': [('B', 1), ('D', 2)], 'B': [('A', 1), ('C', 1)], 'C': [('B', 1), ('D', 1), ('F', 2)], 'D': [('C', 1), ('E', 1), ('A', 2), ('G', 2)], 'E': [('D', 1), ('F', 1), ('G', 3)], 'F': [('E', 1), ('G', 1), ('C', 2)], 'G': [('F', 1), ('D', 2), ('E', 3)]}
+        MST = kruskal(graph)
+        self.assertEqual(MST, [('A', 'B'), ('B', 'C'), ('C', 'D'), ('D', 'E'), ('E', 'F'), ('F', 'G')])
+        
+    def test_kruskal_complexgraph_two(self):
+        graph = {'A': [('B', 3), ('D', 1)], 'B': [('A', 3), ('C', 3)], 'C': [('B', 3), ('D', 3), ('F', 1)], 'D': [('C', 3), ('E', 3), ('A', 3), ('G', 1)], 'E': [('D', 3), ('F', 3), ('G', 2)], 'F': [('E', 3), ('G', 3), ('C', 1)], 'G': [('F', 3), ('D', 1), ('E', 2)]}
+        MST = kruskal(graph)
+        self.assertEqual(MST, [('A', 'D'), ('C', 'F'), ('D', 'G'), ('E', 'G'), ('A', 'B'), ('B', 'C')])
         
 if __name__ == '__main__':
     unittest.main()
